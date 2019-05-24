@@ -7,7 +7,6 @@ import * as recipeView from "./views/recipeView";
 import * as listView from "./views/listView";
 import * as likesView from "./views/likesView";
 import { elements, renderLoader, clearLoader } from "./views/base";
-// import { stat } from 'fs';
 
 /**  Global state of the app **
 // Search Object
@@ -29,6 +28,7 @@ const controlSearch = async () => {
   if (query) {
     // 2) new search object and add to state
     state.search = new Search(query);
+
     // 3) Prepare UI for results
     searchView.clearInput();
     searchView.clearResults();
@@ -132,6 +132,7 @@ elements.shopping.addEventListener("click", e => {
   if (e.target.matches(".shopping__delete, .shopping__delete *")) {
     //  delete from state
     state.list.deleteItem(id);
+
     // delete from UI
     listView.deleteItem(id);
   } else if (e.target.matches(".shopping__count-value")) {
@@ -143,11 +144,6 @@ elements.shopping.addEventListener("click", e => {
 ////////////////////////////////////////////////////////
 //  Likes Controller
 ////////////////////////////////////////////////////////
-
-// TESTING ///////
-// state.likes = new Likes();
-// likesView.toggleLikeMenu(state.likes.getNumLikes());
-// ////////
 
 const controlLike = () => {
   if (!state.likes) state.likes = new Likes();
@@ -169,6 +165,7 @@ const controlLike = () => {
     // add like to UI list
     likesView.renderLike(newLike);
   }
+
   // If recipe IS liked
   else {
     // remove like from state
@@ -180,9 +177,6 @@ const controlLike = () => {
     // remove like from UI list
     likesView.deleteLike(currentID);
   }
-
-  // likesView.renderLike(currentID);
-
   likesView.toggleLikeMenu(state.likes.getNumLikes());
 };
 
